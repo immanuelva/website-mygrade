@@ -13,6 +13,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  output: 'export',  // Enable static exports
+  basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '', // Replace with your repo name
   images: {
     unoptimized: true,
   },
