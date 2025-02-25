@@ -13,7 +13,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: 'export',  // Enable static exports
+  // Only use export for production builds
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '', // Replace with your repo name
   images: {
     unoptimized: true,
@@ -23,6 +24,7 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  optimizeFonts: false,
 }
 
 mergeConfig(nextConfig, userConfig)
