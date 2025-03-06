@@ -13,36 +13,13 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Only use export for production builds
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-  // Set the basePath to match your GitHub Pages repository name
+  output: 'export',
   basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
   images: {
     unoptimized: true,
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
-        port: '',
-        pathname: '/**',
-      },
-    ],
-    // This is important for GitHub Pages deployment
-    path: process.env.NODE_ENV === 'production' ? '/website-mygrade/_next/image' : '/_next/image',
-    loader: 'default',
   },
-  experimental: {
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
-  },
-  optimizeFonts: false,
-  // Remove trailingSlash to prevent redirect issues
   trailingSlash: false,
-  // Make sure assetPrefix matches basePath
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
-  // Add this to ensure static assets are properly handled
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade/' : '',
   distDir: 'out',
   cleanDistDir: true,
 }
