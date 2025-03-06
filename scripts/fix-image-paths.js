@@ -27,21 +27,17 @@ function fixPathsInFile(filePath) {
   // Remove the meta refresh tag that's causing the redirect loop
   content = content.replace(/<meta http-equiv="refresh"[^>]*>/, '');
   
-  // Fix image paths that don't have the website-mygrade prefix
-  content = content.replace(/src="\/([^\/])/g, 'src="/website-mygrade/$1');
-  content = content.replace(/href="\/([^\/])/g, 'href="/website-mygrade/$1');
+  // Fix paths to ensure they only have one /website-mygrade/ prefix
+  // First, normalize any paths with multiple website-mygrade segments
+  content = content.replace(/\/website-mygrade\/website-mygrade\//g, '/website-mygrade/');
   
-  // Special handling for root index.html
-  if (filePath.endsWith('out/index.html')) {
-    // Copy the content from the main app page if it exists
-    const appIndexPath = path.join(process.cwd(), 'out', 'website-mygrade', 'index.html');
-    if (fs.existsSync(appIndexPath)) {
-      content = fs.readFileSync(appIndexPath, 'utf8');
-      // Make sure all paths are correct
-      content = content.replace(/href="\//g, 'href="/website-mygrade/');
-      content = content.replace(/src="\//g, 'src="/website-mygrade/');
-    }
-  }
+  // Then ensure paths that should have the prefix do have it (but only once)
+  content = content.replace(/src="\//g, 'src="/website-mygrade/');
+  content = content.replace(/href="\//g, 'href="/website-mygrade/');
+  
+  // Fix double prefixes that might have been created
+  content = content.replace(/src="\/website-mygrade\/website-mygrade\//g, 'src="/website-mygrade/');
+  content = content.replace(/href="\/website-mygrade\/website-mygrade\//g, 'href="/website-mygrade/');
   
   fs.writeFileSync(filePath, content);
   console.log(`Fixed paths in ${filePath}`);
@@ -52,11 +48,14 @@ function main() {
   const outDir = path.join(process.cwd(), 'out');
   const htmlFiles = findFiles(outDir);
   
-  htmlFiles.forEach(fixPathsInFile);
-  console.log(`Fixed paths in ${htmlFiles.length} files`);
+  htmlFiles.forEach(file => {
+    fixPathsInFile(file);
+  });
   
   // Create a .nojekyll file to prevent GitHub Pages from using Jekyll
   fs.writeFileSync(path.join(outDir, '.nojekyll'), '');
+  
+  console.log('Path fixing completed successfully!');
 }
 
 main(); 
