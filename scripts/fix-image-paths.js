@@ -31,6 +31,18 @@ function fixPathsInFile(filePath) {
   content = content.replace(/src="\/([^\/])/g, 'src="/website-mygrade/$1');
   content = content.replace(/href="\/([^\/])/g, 'href="/website-mygrade/$1');
   
+  // Special handling for root index.html
+  if (filePath.endsWith('out/index.html')) {
+    // Copy the content from the main app page if it exists
+    const appIndexPath = path.join(process.cwd(), 'out', 'website-mygrade', 'index.html');
+    if (fs.existsSync(appIndexPath)) {
+      content = fs.readFileSync(appIndexPath, 'utf8');
+      // Make sure all paths are correct
+      content = content.replace(/href="\//g, 'href="/website-mygrade/');
+      content = content.replace(/src="\//g, 'src="/website-mygrade/');
+    }
+  }
+  
   fs.writeFileSync(filePath, content);
   console.log(`Fixed paths in ${filePath}`);
 }
@@ -42,6 +54,9 @@ function main() {
   
   htmlFiles.forEach(fixPathsInFile);
   console.log(`Fixed paths in ${htmlFiles.length} files`);
+  
+  // Create a .nojekyll file to prevent GitHub Pages from using Jekyll
+  fs.writeFileSync(path.join(outDir, '.nojekyll'), '');
 }
 
 main(); 

@@ -35,32 +35,15 @@ const nextConfig = {
     parallelServerCompiles: true,
   },
   optimizeFonts: false,
+  // Remove trailingSlash to prevent redirect issues
+  trailingSlash: false,
   // Make sure assetPrefix matches basePath
   assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
-  // Add trailingSlash to ensure proper path resolution
-  trailingSlash: true,
 }
 
-mergeConfig(nextConfig, userConfig)
-
-function mergeConfig(nextConfig, userConfig) {
-  if (!userConfig) {
-    return
-  }
-
-  for (const key in userConfig) {
-    if (
-      typeof nextConfig[key] === 'object' &&
-      !Array.isArray(nextConfig[key])
-    ) {
-      nextConfig[key] = {
-        ...nextConfig[key],
-        ...userConfig[key],
-      }
-    } else {
-      nextConfig[key] = userConfig[key]
-    }
-  }
+// Merge configs if userConfig exists
+if (typeof userConfig !== 'undefined' && userConfig.default) {
+  Object.assign(nextConfig, userConfig.default);
 }
 
 export default nextConfig
