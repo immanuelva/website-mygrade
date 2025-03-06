@@ -5,7 +5,8 @@
 
 # next.js
 /.next/
-/out/
+# Remove or comment out the /out/ line
+# /out/
 
 # production
 /build
