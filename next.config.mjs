@@ -13,25 +13,32 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: 'export',
+  // Only use export for production builds
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  // Set the basePath to match your GitHub Pages repository name
   basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
   images: {
     unoptimized: true,
+    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
+  experimental: {
+    webpackBuildWorker: true,
+    parallelServerBuildTraces: true,
+    parallelServerCompiles: true,
+  },
+  optimizeFonts: false,
+  // Remove trailingSlash to prevent redirect issues
   trailingSlash: false,
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade/' : '',
-  distDir: 'out',
-  cleanDistDir: true,
-  webpack: (config, { dev, isServer }) => {
-    if (dev && !isServer) {
-      config.output = {
-        ...config.output,
-        hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
-        hotUpdateMainFilename: 'hot/[hash].hot-update.json'
-      };
-    }
-    return config;
-  },
+  // Make sure assetPrefix matches basePath
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
 }
 
 // Merge configs if userConfig exists

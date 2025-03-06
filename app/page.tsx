@@ -33,28 +33,28 @@ export default function Home() {
               {/* Logos section */}
               <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 mb-12">
                 <Image
-                  src="/website-mygrade/ubc.png"
+                  src="/ubc.png"
                   alt="University of British Columbia"
                   width={160}
                   height={40}
                   className="h-14 w-auto opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                 />
                 <Image
-                  src="/website-mygrade/uoft.png"
+                  src="/uoft.png"
                   alt="University of Toronto"
                   width={160}
                   height={40}
                   className="h-12 w-auto opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                 />
                 <Image
-                  src="/website-mygrade/queens.png"
+                  src="/queens.png"
                   alt="Queens University"
                   width={160}
                   height={80}
                   className="h-12 w-auto opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                 />
                 <Image
-                  src="/website-mygrade/western.png"
+                  src="/western.png"
                   alt="Western University"
                   width={160}
                   height={80}
@@ -80,7 +80,7 @@ export default function Home() {
                   "before:animate-gradient-shift"
                 )}>
                   <Image
-                    src="/website-mygrade/app-showcase.png"
+                    src="/app-showcase.png"
                     alt="App Interface Showcase"
                     width={1200}
                     height={675}
@@ -108,7 +108,7 @@ export default function Home() {
         {/* Graduation cap - top left */}
         <div className="absolute top-[15%] left-[15%] w-40 h-40 opacity-45 animate-float">
           <Image
-            src="/website-mygrade/graduationcap.png"
+            src="/graduationcap.png"
             alt="Graduation Cap"
             width={160}
             height={160}
@@ -119,7 +119,7 @@ export default function Home() {
         {/* A+ grade - top right */}
         <div className="absolute top-[20%] right-[15%] w-32 h-32 opacity-45 animate-float-delay">
           <Image
-            src="/website-mygrade/aplus.png"
+            src="/aplus.png"
             alt="A+ Grade"
             width={128}
             height={128}
@@ -130,7 +130,7 @@ export default function Home() {
         {/* Books - bottom center */}
         <div className="absolute bottom-[10%] left-[40%] w-36 h-36 opacity-45 animate-float-delay">
           <Image
-            src="/website-mygrade/books.png"
+            src="/books.png"
             alt="Books"
             width={144}
             height={144}

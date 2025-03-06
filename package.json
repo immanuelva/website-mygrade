@@ -5,11 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/fix-image-paths.js",
     "start": "next start",
-    "lint": "next lint",
-    "setup": "node scripts/simple-fix.js",
-    "deploy": "next build && node scripts/complete-fix.js",
-    "fix-github": "node scripts/complete-fix.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -47,7 +45,6 @@
     "cmdk": "1.0.4",
     "date-fns": "^2.30.0",
     "embla-carousel-react": "8.5.1",
-    "glob": "^10.4.5",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
     "next": "^14.2.24",

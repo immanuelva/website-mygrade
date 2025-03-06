@@ -4,10 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Add base href for GitHub Pages */}
-        {process.env.NODE_ENV === 'production' && (
-          <base href="/website-mygrade/" />
-        )}
+        {/* Removed the base href that was causing issues */}
       </Head>
       <body>
         <Main />
