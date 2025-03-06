@@ -35,6 +35,9 @@ jobs:
         
       - name: Build with Next.js
         run: npm run build
+      
+      - name: Fix image paths
+        run: node scripts/fix-image-paths.js
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

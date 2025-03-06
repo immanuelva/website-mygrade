@@ -19,6 +19,15 @@ const nextConfig = {
   basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
   images: {
     unoptimized: true,
+    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   experimental: {
     webpackBuildWorker: true,
@@ -28,6 +37,8 @@ const nextConfig = {
   optimizeFonts: false,
   // Make sure assetPrefix matches basePath
   assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
+  // Add trailingSlash to ensure proper path resolution
+  trailingSlash: true,
 }
 
 mergeConfig(nextConfig, userConfig)
