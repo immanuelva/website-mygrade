@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node scripts/fix-image-paths.js",
+    "postbuild": "node scripts/fix-image-paths.js && node scripts/create-404.js",
     "start": "next start",
     "lint": "next lint"
   },

@@ -15,6 +15,7 @@ export default function Header() {
               width={60}
               height={60}
               className="w-16 h-16 relative"
+              unoptimized
             />
           </div>
           <span className="text-white font-bold text-2xl">MyGrade</span>
