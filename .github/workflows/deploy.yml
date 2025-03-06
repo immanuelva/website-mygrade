@@ -35,6 +35,9 @@ jobs:
         
       - name: Build with Next.js
         run: npm run build
+      
+      - name: Copy index.html to root
+        run: cp out/index.html .
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

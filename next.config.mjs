@@ -15,7 +15,8 @@ const nextConfig = {
   },
   // Only use export for production builds
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-  basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '', // Replace with your repo name
+  // Important: Remove the basePath or set it to empty string
+  basePath: '',
   images: {
     unoptimized: true,
   },
@@ -25,6 +26,8 @@ const nextConfig = {
     parallelServerCompiles: true,
   },
   optimizeFonts: false,
+  // Add this to ensure assets are properly referenced
+  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
 }
 
 mergeConfig(nextConfig, userConfig)
