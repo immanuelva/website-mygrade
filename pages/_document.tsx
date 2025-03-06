@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <base href="/website-mygrade/" />
+        {/* Removed the base href that was causing issues */}
       </Head>
       <body>
         <Main />

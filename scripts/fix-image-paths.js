@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Function to recursively find all HTML and JS files
+// Function to recursively find all HTML files
 function findFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
   
@@ -11,11 +11,7 @@ function findFiles(dir, fileList = []) {
     
     if (stat.isDirectory()) {
       findFiles(filePath, fileList);
-    } else if (
-      filePath.endsWith('.html') || 
-      filePath.endsWith('.js') || 
-      filePath.endsWith('.css')
-    ) {
+    } else if (filePath.endsWith('.html')) {
       fileList.push(filePath);
     }
   });
@@ -28,12 +24,12 @@ function fixPathsInFile(filePath) {
   console.log(`Processing ${filePath}`);
   let content = fs.readFileSync(filePath, 'utf8');
   
+  // Remove the meta refresh tag that's causing the redirect loop
+  content = content.replace(/<meta http-equiv="refresh"[^>]*>/, '');
+  
   // Fix image paths that don't have the website-mygrade prefix
   content = content.replace(/src="\/([^\/])/g, 'src="/website-mygrade/$1');
   content = content.replace(/href="\/([^\/])/g, 'href="/website-mygrade/$1');
-  
-  // Fix paths in CSS url() references
-  content = content.replace(/url\(\/([^\/])/g, 'url(/website-mygrade/$1');
   
   fs.writeFileSync(filePath, content);
   console.log(`Fixed paths in ${filePath}`);
@@ -41,15 +37,11 @@ function fixPathsInFile(filePath) {
 
 // Main function
 function main() {
-  console.log('Starting path fixing process...');
+  const outDir = path.join(process.cwd(), 'out');
+  const htmlFiles = findFiles(outDir);
   
-  // Find all HTML and JS files in the out directory
-  const files = findFiles('./out');
-  
-  // Fix paths in each file
-  files.forEach(fixPathsInFile);
-  
-  console.log('Path fixing process completed!');
+  htmlFiles.forEach(fixPathsInFile);
+  console.log(`Fixed paths in ${htmlFiles.length} files`);
 }
 
 main(); 
