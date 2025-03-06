@@ -33,7 +33,7 @@ export default function Home() {
               {/* Logos section */}
               <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 mb-12">
                 <Image
-                  src="/ubc.png"
+                  src="/website-mygrade/ubc.png"
                   alt="University of British Columbia"
                   width={160}
                   height={40}

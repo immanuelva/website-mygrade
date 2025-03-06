@@ -19,7 +19,6 @@ const nextConfig = {
   basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
   images: {
     unoptimized: true,
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
     remotePatterns: [
       {
         protocol: 'https',

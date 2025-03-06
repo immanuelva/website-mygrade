@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 // Function to copy a file
 function copyFile(source, target) {
@@ -35,10 +36,38 @@ function copyDir(source, target) {
 function main() {
   console.log('Starting deployment process...');
   
-  // Copy the out directory contents to the root
-  copyDir('./out', './');
+  // Ensure .nojekyll file exists in the out directory
+  fs.writeFileSync(path.join(process.cwd(), 'out', '.nojekyll'), '');
+  console.log('Created .nojekyll file in out directory');
+  
+  // Copy the public directory to out if it exists
+  const publicDir = path.join(process.cwd(), 'public');
+  if (fs.existsSync(publicDir)) {
+    const entries = fs.readdirSync(publicDir, { withFileTypes: true });
+    for (const entry of entries) {
+      const sourcePath = path.join(publicDir, entry.name);
+      const targetPath = path.join(process.cwd(), 'out', entry.name);
+      
+      if (entry.isDirectory()) {
+        copyDir(sourcePath, targetPath);
+      } else {
+        copyFile(sourcePath, targetPath);
+      }
+    }
+  }
   
   console.log('Deployment process completed!');
+  
+  // Optional: Push to GitHub Pages
+  // try {
+  //   console.log('Pushing to GitHub Pages...');
+  //   execSync('git add out/');
+  //   execSync('git commit -m "Deploy to GitHub Pages"');
+  //   execSync('git subtree push --prefix out origin gh-pages');
+  //   console.log('Successfully pushed to GitHub Pages!');
+  // } catch (error) {
+  //   console.error('Error pushing to GitHub Pages:', error.message);
+  // }
 }
 
 main(); 

@@ -44,6 +44,9 @@ function fixPathsInFile(filePath) {
     // Fix image paths in JSON data (for Next.js)
     content = content.replace(/"url":"\/_next\//g, '"url":"/website-mygrade/_next/');
     content = content.replace(/"url":"\/(?!website-mygrade\/)/g, '"url":"/website-mygrade/');
+    
+    // Fix relative image paths (without leading slash)
+    content = content.replace(/src="([^h][^t][^t][^p][^s]?[^:][^\/][^\/][^w][^w][^w])/g, 'src="/website-mygrade/$1');
   }
   
   // Fix double prefixes that might have been created
@@ -54,6 +57,7 @@ function fixPathsInFile(filePath) {
   if (filePath.endsWith('.css')) {
     content = content.replace(/url\(\/_next\//g, 'url(/website-mygrade/_next/');
     content = content.replace(/url\(\/(?!website-mygrade\/)/g, 'url(/website-mygrade/');
+    content = content.replace(/url\(([^h][^t][^t][^p][^s]?[^:][^\/][^\/][^w][^w][^w])/g, 'url(/website-mygrade/$1');
   }
   
   fs.writeFileSync(filePath, content);
