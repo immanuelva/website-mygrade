@@ -8,8 +8,10 @@
     "postbuild": "node scripts/fix-image-paths.js && node scripts/create-404.js",
     "start": "next start",
     "lint": "next lint",
-    "setup": "node scripts/create-public-dir.js && node scripts/copy-images.js",
-    "deploy": "npm run setup && next build && node scripts/fix-image-paths.js && node scripts/create-404.js && node scripts/deploy.js"
+    "setup": "node scripts/create-public-dir.js && node scripts/copy-images.js && node scripts/create-test-page.js",
+    "fix-components": "node scripts/fix-component-image-paths.js",
+    "verify-assets": "node scripts/verify-assets.js",
+    "deploy": "npm run setup && npm run fix-components && next build && node scripts/fix-image-paths.js && node scripts/create-404.js && node scripts/verify-assets && node scripts/deploy.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -47,6 +49,7 @@
     "cmdk": "1.0.4",
     "date-fns": "^2.30.0",
     "embla-carousel-react": "8.5.1",
+    "glob": "^10.4.5",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
     "next": "^14.2.24",

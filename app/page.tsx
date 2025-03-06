@@ -40,21 +40,21 @@ export default function Home() {
                   className="h-14 w-auto opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                 />
                 <Image
-                  src="/uoft.png"
+                  src="/website-mygrade/uoft.png"
                   alt="University of Toronto"
                   width={160}
                   height={40}
                   className="h-12 w-auto opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                 />
                 <Image
-                  src="/queens.png"
+                  src="/website-mygrade/queens.png"
                   alt="Queens University"
                   width={160}
                   height={80}
                   className="h-12 w-auto opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                 />
                 <Image
-                  src="/western.png"
+                  src="/website-mygrade/western.png"
                   alt="Western University"
                   width={160}
                   height={80}
@@ -80,7 +80,7 @@ export default function Home() {
                   "before:animate-gradient-shift"
                 )}>
                   <Image
-                    src="/app-showcase.png"
+                    src="/website-mygrade/app-showcase.png"
                     alt="App Interface Showcase"
                     width={1200}
                     height={675}
@@ -108,7 +108,7 @@ export default function Home() {
         {/* Graduation cap - top left */}
         <div className="absolute top-[15%] left-[15%] w-40 h-40 opacity-45 animate-float">
           <Image
-            src="/graduationcap.png"
+            src="/website-mygrade/graduationcap.png"
             alt="Graduation Cap"
             width={160}
             height={160}
@@ -119,7 +119,7 @@ export default function Home() {
         {/* A+ grade - top right */}
         <div className="absolute top-[20%] right-[15%] w-32 h-32 opacity-45 animate-float-delay">
           <Image
-            src="/aplus.png"
+            src="/website-mygrade/aplus.png"
             alt="A+ Grade"
             width={128}
             height={128}
@@ -130,7 +130,7 @@ export default function Home() {
         {/* Books - bottom center */}
         <div className="absolute bottom-[10%] left-[40%] w-36 h-36 opacity-45 animate-float-delay">
           <Image
-            src="/books.png"
+            src="/website-mygrade/books.png"
             alt="Books"
             width={144}
             height={144}

@@ -19,6 +19,7 @@ const nextConfig = {
   basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
   images: {
     unoptimized: true,
+    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -27,6 +28,9 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    // This is important for GitHub Pages deployment
+    path: process.env.NODE_ENV === 'production' ? '/website-mygrade/_next/image' : '/_next/image',
+    loader: 'default',
   },
   experimental: {
     webpackBuildWorker: true,
@@ -38,6 +42,9 @@ const nextConfig = {
   trailingSlash: false,
   // Make sure assetPrefix matches basePath
   assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
+  // Add this to ensure static assets are properly handled
+  distDir: 'out',
+  cleanDistDir: true,
 }
 
 // Merge configs if userConfig exists
