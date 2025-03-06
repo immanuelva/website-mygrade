@@ -15,8 +15,8 @@ const nextConfig = {
   },
   // Only use export for production builds
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-  // Important: Remove the basePath or set it to empty string
-  basePath: '',
+  // Set the basePath to match your GitHub Pages repository name
+  basePath: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
   images: {
     unoptimized: true,
   },
@@ -26,8 +26,8 @@ const nextConfig = {
     parallelServerCompiles: true,
   },
   optimizeFonts: false,
-  // Add this to ensure assets are properly referenced
-  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
+  // Make sure assetPrefix matches basePath
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
 }
 
 mergeConfig(nextConfig, userConfig)

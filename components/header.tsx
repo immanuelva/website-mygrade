@@ -10,7 +10,7 @@ export default function Header() {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/60 via-pink-500/50 to-blue-500/60 opacity-75 blur-lg group-hover:blur-xl transition-all duration-300 group-hover:scale-110"></div>
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/appstore-removebg-uICieJVNfPaCvBZHBRsnYAED4vbaq5.png"
+              src="/appstore-removebg.png"
               alt="MyGrade"
               width={60}
               height={60}

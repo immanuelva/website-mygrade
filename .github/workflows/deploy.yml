@@ -35,16 +35,11 @@ jobs:
         
       - name: Build with Next.js
         run: npm run build
-      
-      - name: Copy files from out directory to root
-        run: |
-          cp -r out/* .
-          ls -la
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./out
 
   deploy:
     environment:
