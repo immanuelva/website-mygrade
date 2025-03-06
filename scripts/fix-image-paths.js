@@ -24,8 +24,8 @@ function fixPathsInFile(filePath) {
   console.log(`Processing ${filePath}`);
   let content = fs.readFileSync(filePath, 'utf8');
   
-  // Remove the meta refresh tag that's causing the redirect loop
-  content = content.replace(/<meta http-equiv="refresh"[^>]*>/, '');
+  // Remove all meta refresh tags completely
+  content = content.replace(/<meta http-equiv="refresh"[^>]*>/g, '');
   
   // Fix paths to ensure they only have one /website-mygrade/ prefix
   // First, normalize any paths with multiple website-mygrade segments

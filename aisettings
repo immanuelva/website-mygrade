@@ -1,0 +1,6 @@
+{
+  "baseUrl": "/website-mygrade",
+  "removeRedirects": true,
+  "fixPaths": true,
+  "enableDirectAccess": true
+} 
