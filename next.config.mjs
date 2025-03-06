@@ -22,6 +22,16 @@ const nextConfig = {
   assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade/' : '',
   distDir: 'out',
   cleanDistDir: true,
+  webpack: (config, { dev, isServer }) => {
+    if (dev && !isServer) {
+      config.output = {
+        ...config.output,
+        hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
+        hotUpdateMainFilename: 'hot/[hash].hot-update.json'
+      };
+    }
+    return config;
+  },
 }
 
 // Merge configs if userConfig exists
