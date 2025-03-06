@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "setup": "node scripts/simple-fix.js",
-    "deploy": "next build && node scripts/github-pages-fix.js"
+    "deploy": "next build && node scripts/complete-fix.js",
+    "fix-github": "node scripts/complete-fix.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
