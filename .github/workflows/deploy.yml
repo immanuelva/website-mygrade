@@ -41,6 +41,9 @@ jobs:
       - name: Run comprehensive fix script
         run: node scripts/complete-fix.js
         
+      - name: Copy CNAME to output directory
+        run: cp CNAME out/
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

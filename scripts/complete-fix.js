@@ -60,24 +60,28 @@ function create404Page(outDir) {
     <title>MyGrade - Page Not Found</title>
     <script>
       // Single Page Apps for GitHub Pages
-      // https://github.com/rafgraph/spa-github-pages
-      // This script takes the current URL and converts the path and query
-      // string into just a query string, and then redirects the browser
-      // to the new URL with only a query string and hash fragment.
-      var pathSegmentsToKeep = 1; // Keep /website-mygrade/
-      
+      // MIT Licensed - https://github.com/rafgraph/spa-github-pages
+      var segmentCount = 0;
       var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      
+      // Don't redirect if we're already on the correct path
+      if (l.pathname.indexOf('/website-mygrade') !== 0) {
+        l.replace(
+          l.protocol + '//' + l.hostname + 
+          (l.port ? ':' + l.port : '') +
+          '/website-mygrade' + 
+          l.pathname.slice(segmentCount) +
+          l.search
+        );
+      }
     </script>
 </head>
 <body>
-    <p>Redirecting to MyGrade...</p>
+    <div style="text-align: center; padding: 50px;">
+        <h1>Page Not Found</h1>
+        <p>The page you are looking for doesn't exist or has been moved.</p>
+        <a href="/website-mygrade/">Return to Home</a>
+    </div>
 </body>
 </html>`;
   
@@ -97,12 +101,16 @@ function createIndexPage(outDir) {
     <script src="/website-mygrade/_next/static/chunks/main.js" defer></script>
     <script src="/website-mygrade/_next/static/chunks/app.js" defer></script>
     <script>
-      // This script checks if a redirect is needed
+      // Handle both GitHub Pages and custom domain
       (function() {
-        // If we're not on the base path, redirect to it
-        if (window.location.pathname !== '/website-mygrade/' && 
-            window.location.pathname !== '/website-mygrade') {
-          window.location.href = '/website-mygrade/';
+        var hostname = window.location.hostname;
+        var pathname = window.location.pathname;
+        
+        // Only redirect if needed
+        if (pathname !== '/website-mygrade/' && 
+            pathname !== '/website-mygrade' &&
+            pathname.indexOf('/website-mygrade/') !== 0) {
+          window.location.replace('/website-mygrade/');
         }
       })();
     </script>
@@ -121,6 +129,10 @@ function createIndexPage(outDir) {
   
   fs.writeFileSync(path.join(outDir, 'index.html'), content);
   console.log('Created custom index.html page');
+  
+  // Also copy this to the root directory for GitHub Pages
+  fs.writeFileSync(path.join(process.cwd(), 'index.html'), content);
+  console.log('Created root index.html page');
 }
 
 // Main function

@@ -39,6 +39,21 @@ const nextConfig = {
   trailingSlash: false,
   // Make sure assetPrefix matches basePath
   assetPrefix: process.env.NODE_ENV === 'production' ? '/website-mygrade' : '',
+  // Add rewrites for custom domain
+  async rewrites() {
+    return [
+      {
+        source: '/:path*',
+        destination: '/website-mygrade/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'mygrade.app',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 // Merge configs if userConfig exists
