@@ -44,6 +44,42 @@ jobs:
       - name: Copy CNAME to output directory
         run: cp CNAME out/
         
+      - name: Verify 404.html exists
+        run: |
+          if [ ! -f out/404.html ]; then
+            echo "404.html is missing, creating it"
+            cat > out/404.html << 'EOL'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyGrade - Page Not Found</title>
+    <script>
+      var segmentCount = 0;
+      var l = window.location;
+      if (l.pathname.indexOf('/website-mygrade') !== 0) {
+        l.replace(
+          l.protocol + '//' + l.hostname + 
+          (l.port ? ':' + l.port : '') +
+          '/website-mygrade' + 
+          l.pathname.slice(segmentCount) +
+          l.search
+        );
+      }
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px;">
+        <h1>Page Not Found</h1>
+        <p>The page you are looking for doesn't exist or has been moved.</p>
+        <a href="/website-mygrade/">Return to Home</a>
+    </div>
+</body>
+</html>
+EOL
+          fi
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
