@@ -5,8 +5,6 @@ try {
   // ignore error
 }
 
-// helloo :)
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
