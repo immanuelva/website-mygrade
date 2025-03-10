@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: #4a6cf7;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #4a6cf7;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #3451b2;
+        }
+        
+        .features {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #4a6cf7;
+        }
+        
+        footer {
+            background-color: #2d3748;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h2>Course Management App</h2>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Simplify Your Course Management</h1>
+            <p>An intuitive platform designed to help educators and students organize, track, and optimize their learning experience.</p>
+            <a href="#features" class="cta-button">Explore Features</a>
+        </div>
+    </section>
+    
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Course Organization</h3>
+                    <p>Easily create, organize, and manage courses with our intuitive interface. Set up modules, lessons, and assignments in minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor student progress in real-time. Get insights into completion rates, grades, and engagement metrics.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Interactive Learning</h3>
+                    <p>Engage students with interactive content, discussions, and collaborative projects all in one place.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Assessment Tools</h3>
+                    <p>Create quizzes, assignments, and exams with our versatile assessment tools. Automate grading to save time.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Mobile Friendly</h3>
+                    <p>Access your courses anytime, anywhere with our responsive design that works on all devices.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Make data-driven decisions with comprehensive analytics on student performance and engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Course Management App. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
