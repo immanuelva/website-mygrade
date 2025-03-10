@@ -2,88 +2,43 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches:
+      - main  # Set this to your default branch
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
-          cache: npm
+          node-version: '18'
+          cache: 'npm'
       
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-        
       - name: Install dependencies
         run: npm ci
-        
-      - name: Build with Next.js
-        run: npx next build
-        env:
-          NODE_ENV: production
       
-      - name: Run comprehensive fix script
-        run: node scripts/complete-fix.js
-        
-      - name: Copy CNAME to output directory
-        run: cp CNAME out/
-        
-      - name: Verify 404.html exists
-        run: |
-          if [ ! -f out/404.html ]; then
-            echo "404.html is missing, creating it"
-            cat > out/404.html << 'EOL'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyGrade - Page Not Found</title>
-    <script>
-      var segmentCount = 0;
-      var l = window.location;
-      if (l.pathname.indexOf('/website-mygrade') !== 0) {
-        l.replace(
-          l.protocol + '//' + l.hostname + 
-          (l.port ? ':' + l.port : '') +
-          '/website-mygrade' + 
-          l.pathname.slice(segmentCount) +
-          l.search
-        );
-      }
-    </script>
-</head>
-<body>
-    <div style="text-align: center; padding: 50px;">
-        <h1>Page Not Found</h1>
-        <p>The page you are looking for doesn't exist or has been moved.</p>
-        <a href="/website-mygrade/">Return to Home</a>
-    </div>
-</body>
-</html>
-EOL
-          fi
-        
+      - name: Build
+        run: npm run build
+      
+      - name: Static Export
+        run: npx next export || npm run build -- -o out
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: ./out
+          path: './out'  # Next.js static export directory
 
   deploy:
     environment:
@@ -94,4 +49,4 @@ EOL
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v2 
